@@ -2,7 +2,6 @@
 import random
 from anipage import start_screen
 
-
 # this function will open a file and return a random word
 def select_word():
     # with open is the construct used to open our file "test-word.txt" in read mode as the 'r' shows as a file
@@ -71,8 +70,8 @@ def play_game():
 
         # breaks the loop! checks the updated word for underscores, if there are none then BREAK!
         if "_" not in display:
-            print(f"Hey, way to go! You guessed the word! {random_word}")
             start_screen()
+            print(f"Hey, way to go! You guessed the word! {random_word}")
             break
 
         # if the word has not been guessed then call 'user_guess' to get a new letter, assigns that to the variable 'guess'
@@ -83,7 +82,8 @@ def play_game():
         if guess not in random_word:
             counter -= 1
     # else to the while loop, when counter is no longer meeting the condition aka you lost, print the end message
-    else: 
+    else:
+        start_screen()
         print(f"Game Over. The word was: {random_word}")
         
 
