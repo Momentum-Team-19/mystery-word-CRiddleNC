@@ -1,5 +1,6 @@
 # exactly what it sounds like, to use the random module you have to import it first
 import random
+from anipage import start_screen
 
 
 # this function will open a file and return a random word
@@ -71,6 +72,7 @@ def play_game():
         # breaks the loop! checks the updated word for underscores, if there are none then BREAK!
         if "_" not in display:
             print(f"Hey, way to go! You guessed the word! {random_word}")
+            start_screen()
             break
 
         # if the word has not been guessed then call 'user_guess' to get a new letter, assigns that to the variable 'guess'
@@ -86,13 +88,19 @@ def play_game():
         
 
 if __name__ == "__main__":
+    # setting replay as default true
     replay = True
+    # first call of the game
     play_game()
+    # loop determining if you replay
     while replay:
+        # replay value set by user input
         replay = input("Do you want to play again? (y/n):").lower().strip()
-        # while replay not in ["y", "n"]:
-        #    replay = input("Please enter 'y' or 'n': ").lower().strip()
-        # if replay == "n":
-        #    replay = False
-        #    break  
+        if replay == "n":
+            replay = False
+        # if they pick y then we can stay in this loop as long as they like    
+        elif replay == "y":
+            play_game()    
+        else:
+            print("Choose (y/n)")
     print("Thanks for playing!")
