@@ -1,21 +1,36 @@
 from random import randint
 from asciimatics.screen import Screen
 import time
+import math
+import pygame
 
 
 def title_screen(screen):
     start_time = time.time()
     center_x = screen.width //2
     center_y = screen.height //2
+    animation_duration = 4 
 
-    while time.time() - start_time < 8:
-        screen.print_at('Welcome to GUESS THAT WORD!', center_x - len('Welcome to Guess THAT WORD') // 2, center_y, colour=randint(0, screen.colours - 1), bg=randint(0, screen.colours - 1))
+    while time.time() - start_time < animation_duration:
+        progress = (time.time() - start_time) / animation_duration
+
+        radius = center_x * progress
+        angle = 2 * math.pi * progress
+        x = int(center_x + radius * math.cos(angle))
+        y = int(center_y + radius * math.sin(angle))
+
+
+        screen.clear_buffer(0, 0, 0)
+        screen.print_at('Welcome to GUESS THAT WORD!', x - len('Welcome to GUESS THAT WORD') // 2 , y, colour=randint(0, screen.colours - 1), bg=randint(0, screen.colours))
         ev = screen.get_key()
         if ev in (ord('Q'), ord('q')):
             return
+        time.sleep(0.1)
+    while time.time() - start_time < 2 * animation_duration:
+        screen.clear_buffer(0, 0, 0)
+        screen.print_at('Welcome to GUESS THAT WORD!', center_x - len('Welcome to GUESS THAT WORD!') // 2, center_y, colour=randint(0, screen.colours - 1), bg=randint(0, screen.colours -1))
         screen.refresh()
         time.sleep(0.1)
-
 
 def win_screen(screen):
     start_time = time.time()
