@@ -1,6 +1,8 @@
 # exactly what it sounds like, to use the random module you have to import it first
 import random
 from anipage import start_screen
+import os
+results = ""
 
 # this function will open a file and return a random word
 def select_word():
@@ -55,6 +57,7 @@ def user_guess(counter):
 
 # play_game function, holds the game loop and tracks the guessed letters
 def play_game():
+    global results
     # calls the select_word function to pick a random word and assigns it to the variable 'random_word'
     random_word = select_word()
     # initializing an empty list called 'guessed_letters' - this is a container to store the letters the user has guessed
@@ -70,7 +73,9 @@ def play_game():
 
         # breaks the loop! checks the updated word for underscores, if there are none then BREAK!
         if "_" not in display:
-            start_screen()
+            results = "win"
+            os.system('clear')
+            start_screen("win")
             print(f"Hey, way to go! You guessed the word! {random_word}")
             break
 
@@ -83,7 +88,9 @@ def play_game():
             counter -= 1
     # else to the while loop, when counter is no longer meeting the condition aka you lost, print the end message
     else:
-        start_screen()
+        results = "loss"
+        os.system('clear')
+        start_screen("loss")
         print(f"Game Over. The word was: {random_word}")
         
 
