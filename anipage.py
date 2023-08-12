@@ -5,12 +5,16 @@ import time
 
 def title_screen(screen):
     start_time = time.time()
-    while time.time() - start_time < 3:
-        screen.print_at('VICTORY!', randint(0, screen.width), randint(0, screen.height), colour=randint(0, screen.colours - 1), bg=randint(0, screen.colours - 1))
+    center_x = screen.width //2
+    center_y = screen.height //2
+
+    while time.time() - start_time < 8:
+        screen.print_at('Welcome to GUESS THAT WORD!', center_x - len('Welcome to Guess THAT WORD') // 2, center_y, colour=randint(0, screen.colours - 1), bg=randint(0, screen.colours - 1))
         ev = screen.get_key()
         if ev in (ord('Q'), ord('q')):
             return
         screen.refresh()
+        time.sleep(0.1)
 
 
 def win_screen(screen):
@@ -46,7 +50,9 @@ def loss_screen(screen):
 
 
 def start_screen(results):
-    if results == "win":
+    if results == "":
+        Screen.wrapper(title_screen)
+    elif results == "win":
         Screen.wrapper(win_screen)
     else:
         Screen.wrapper(loss_screen)
