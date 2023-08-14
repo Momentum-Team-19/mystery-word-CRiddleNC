@@ -9,7 +9,7 @@ def title_screen(screen):
     start_time = time.time()
     center_x = screen.width //2
     center_y = screen.height //2
-    animation_duration = 4 
+    animation_duration = 4
 
     while time.time() - start_time < animation_duration:
         progress = (time.time() - start_time) / animation_duration
